@@ -18,7 +18,7 @@ public class Application {
         // 1명의 회원 생성
         MemberDTO member = new MemberDTO();
         member.setNo(1);
-        member.setName("조평훈");
+        member.setName("이하연");
         member.setAge(20);
 
         System.out.println(member.getNo());

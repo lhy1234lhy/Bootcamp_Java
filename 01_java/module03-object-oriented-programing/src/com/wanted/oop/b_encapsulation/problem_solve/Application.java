@@ -33,14 +33,14 @@ public class Application {
         monster3.setName("피카츄");
         monster3.setHp(-200);
 
-        monster3.getInfo();
+        System.out.println(monster3.getInfo());
 
         /* hi. 이제 거의 문제가 해결됐다.
         *   다만 아직까지 문제가 되는 부분은
         *   여전히 필드에 접근할 수 있다는 것이다.
         *  */
 //        monster3.hp = -5500;
-        monster3.getInfo();
+        monster3.getInfo(); // 얘는 리터럴이라서 출력 안됨. 위처럼 sout 구문으로 감싸야 출력됨
 
     }
 }

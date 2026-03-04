@@ -4,7 +4,7 @@ public class Application {
     public static void main(String[] args) {
 
         /* hi. 캡슐화 적용 전 발생할 수 있는 문제 (3)
-        *   앞서 방생한 문제1, 2를 해결해보자.
+        *   앞서 발생한 문제1, 2를 해결해보자.
         *   method를 통해서 필드에 직접 값을 넣지 않고 진행하겠다.*/
 
         // 1번 몬스터 생성
@@ -22,7 +22,7 @@ public class Application {
         monster2.getInfo();
 
         /* hi. 문제 상황 발생!!
-        *   검증되지 않은 값을 넣을 때 문제가 발생할 수 있다.
+        *   검증되지 않은 값을 넣을 때 문제가 발생할 수 있다. ex) 음수
         *  */
 
 
