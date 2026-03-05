@@ -17,6 +17,7 @@ public class StaticFieldTest {
         return staticCount;
     }
 
+
     /* 각 필드를 호출 시 마다 1씩 증가시키는 용도의 메소드 */
     public void increaseNonStatic(){
         this.nonStaticCount++; // this는 자기 자신. 즉 주소.

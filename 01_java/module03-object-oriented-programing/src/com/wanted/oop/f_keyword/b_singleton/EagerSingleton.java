@@ -2,7 +2,7 @@ package com.wanted.oop.f_keyword.b_singleton;
 
 public class EagerSingleton {
 
-    // 시작하자마자 생김
+    // 시작하자마자 생김 (객체 생성 -> 메소드 생성) / 초기 로딩 느림, getInstance 나온 후 생성되므로 뒤에서 느림
     private static EagerSingleton eager = new EagerSingleton();
 
     // 기본 생성자

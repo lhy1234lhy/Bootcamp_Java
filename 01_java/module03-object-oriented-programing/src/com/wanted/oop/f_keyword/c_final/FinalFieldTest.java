@@ -7,9 +7,11 @@ public class FinalFieldTest {
     *   따라서 초기 인스턴스가 생성되고나면 기본값인 0이 들어가는데
     *   초기화 이후에 값을 변경할 수 없기 때문에 선언과 동시에 초기화를
     *   해주어야 한다.
+    *
+    *   final 변수는 대문자로 작성
     * */
 
-//    private final int NON_STATIC_NUM; // 에러남
+//    private final int NON_STATIC_NUM; // 에러남 (초기화 안 해서)
     // 1. final 키워드는 선언과 동시에 초기화 해야한다.
     private final int NON_STATIC_NUM = 1;
 
