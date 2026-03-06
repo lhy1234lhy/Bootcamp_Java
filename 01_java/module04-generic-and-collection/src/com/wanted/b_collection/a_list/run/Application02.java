@@ -25,6 +25,7 @@ public class Application02 {
 
         System.out.println("bookList = " + bookList);
 
+
         for (BookDTO book : bookList){
             System.out.println("book = " + book);
         }
