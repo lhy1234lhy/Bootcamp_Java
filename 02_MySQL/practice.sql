@@ -146,7 +146,7 @@ where HIRE_DATE <= DATE_SUB(NOW(), INTERVAL 20 year);
 
 -- EMPLOYEE 테이블에서 직원의 이름, 입사일, 근무년수를 조회
 -- 단, 근무년수는 현재년도 - 입사년도로 조회
-select EMP_NAME, HIRE_DATE, DATE_SUHIRE_DATE
+select EMP_NAME, HIRE_DATE, DATE_SUHIRE_DATE 
 
 -- EMPLOYEE 테이블에서 사번이 홀수인 직원들의 정보 모두 조회 (mod)
 select  *

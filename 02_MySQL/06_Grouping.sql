@@ -96,6 +96,7 @@ where status = 'completed'
 group by course_id
 having count(*) >= 2
 order by '등록 학생 수' desc;
+-- order by '등록 학생 수' desc; 이 부분을 백틱으로 하면 정렬된다. 
 
 -- 2024 년에 가입한 사용자들 중에서, 월별 가입자 수가 15명 이상인 월과
 -- 해당 월의 가입자 수를 조회한다.
