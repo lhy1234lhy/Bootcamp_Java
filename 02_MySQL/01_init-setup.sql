@@ -1,11 +1,12 @@
--- 데이터베이스를 설치하면, root 라는 사용자가 주어지게 된다.
+-- 데이터베이스를 설치하면, root 라는 사용자가 주어지게 된다.alter
 -- root 는 마스터 키 같은 존재이다.
 -- 실무에서는 최소 권한의 원칙에 의해 하나의 프로젝트 데이터베이스를 만들 때
--- 모든 권한을 가지고 있는 root 에 데이터베이스를  만드는 것이 아닌,
--- 반드시 필요한 권한만 가진 최소의 connection 을 만들어서 데이터베이스를 구축하게 된다. 
+-- 모든 권한을 가지고 있는 root 에 데이터베이스를 만드는 것이 아닌,
+-- 반드시 필요한 권한만 가진 최소의 connection 을 만들어서 데이터베이스를 구축하게 된다.
 
 -- 기존 데이터베이스 삭제 (있다면)
 DROP DATABASE IF EXISTS WANTED_LMS;
+
 
 
 -- 새로운 데이터베이스 생성
@@ -19,6 +20,7 @@ CREATE DATABASE WANTED_LMS;
 create user 'wanted'@'%' IDENTIFIED BY 'wanted';
 
 
+
 -- 계정 권한 부여
 -- GRANT 권한을 부여하기 위한 명령문이다.
 -- ALL PRIVILEGES 'root'계정과 비슷한 수준의 권한을 준다.
@@ -27,8 +29,9 @@ create user 'wanted'@'%' IDENTIFIED BY 'wanted';
 GRANT ALL PRIVILEGES ON WANTED_LMS.* TO 'wanted'@'%';
 
 
+
 -- WANTED_LMS 사용
 USE WANTED_LMS;
 
 -- SHOW TABLES: 현재 테이블 목록 확인.
-SHOW TABLES;      
+SHOW TABLES;
