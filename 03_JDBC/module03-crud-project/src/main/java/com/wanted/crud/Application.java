@@ -13,7 +13,7 @@ public class Application {
 
     public static void main(String[] args) {
 
-        // try-with-resource 문으로 감싸기, catch절 추가
+        // connection 만들기 (try-with-resource 문으로 감싸기, catch절 추가)
         try (Connection con = JDBCTemplate.getConnection()) {
 
             System.out.println("데이터베이스 연결 성공!!!");
@@ -31,8 +31,8 @@ public class Application {
              * @deprecated 현재 아래에 작성 될 코드는 나중에는 사라지는 코드
              * */
 
-            CourseService service = new CourseService(con);
-            CourseController controller = new CourseController(service);
+            CourseService service = new CourseService(con); // con -> ser
+            CourseController controller = new CourseController(service); // ser -> con
             CourseOutputView outputView = new CourseOutputView();
             CourseInputView inputView = new CourseInputView(controller, outputView);
 

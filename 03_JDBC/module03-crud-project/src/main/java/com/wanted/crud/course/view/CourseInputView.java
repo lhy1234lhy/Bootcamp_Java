@@ -2,36 +2,42 @@ package com.wanted.crud.course.view;
 
 import com.wanted.crud.course.controller.CourseController;
 import com.wanted.crud.course.model.dto.CourseDTO;
+import com.wanted.crud.course.model.dto.CourseSectionDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
 public class CourseInputView {
 
-    /* hi.
-    *   View 계층의 책임
-    *   - 사용자의 입력 or 출력을 담당한다. (Scanner 객체)
-    *   - InputView의 할 일
-    *   - 사용자가 고를 수 있는 메뉴를 출력한다.
-    *   - Scanner를 활용한 입력을 처리한다.
-    *   - Controller 를 사용자 입력에 맞게 호출한다.
-    *   - OutputView를 호출하여 결과를 출력할 수 있게 한다.
-    *   - InputView 가 하면 안되는 일
-    *   - SQL 작성
-    *   - 비즈니스 로직 처리 X
-    *   - Commit / Rollback X
-    *  */
+    /* comment.
+     *   View 계층의 책임
+     *   - 사용자의 입력 or 출력을 담당한다.
+     *   .
+     *   * InputView 의 할 일
+     *   - 사용자가 고를 수 있는 메뉴를 출력한다.
+     *   - Scanner 를 활용한 입력을 처리한다.
+     *   - Controller 를 사용작 입력에 맞게 호출한다.
+     *   - OutputView 를 호출하여 결과를 출력할 수 잇게 한다.
+     *   .
+     *   * InputView 가 하면 안 되는 일
+     *   - SQL 작성 X
+     *   - 비즈니스 로직 처리 X
+     *   - Commit / Rollback X
+     *  */
 
+    // 외부에서는 접근할 수 없고 InputView에서만 접근 가능함. (Controller & outputView)
     private final CourseController controller;
     private final CourseOutputView outputView;
     private final Scanner sc = new Scanner(System.in);
 
-    // 생성자를 통한 final 변수 초기화 (그대로 변수 입력하는 방법도 있음)
-    public CourseInputView(CourseController controller, CourseOutputView outputView){
+    // 생성자를 통한 final 변수 초기화
+    public CourseInputView(CourseController controller, CourseOutputView outputView) {
         this.controller = controller;
         this.outputView = outputView;
     }
-    public void displayMainMenu() {
+
+    public void displayMainMenu() throws SQLException {
 
         while (true) {
             System.out.println();
@@ -65,7 +71,7 @@ public class CourseInputView {
         }
     }
 
-    // 기초 실습을 누르면 전체 강좌가 조회 된다.
+    // 기초 실습을 누르면 전체 강좌가 조회된다.
     private void displayBeginnerMenu() {
         outputView.printMessage("\n--- [기초 실습] 강좌 목록 전체 조회 ---");
 
@@ -111,7 +117,7 @@ public class CourseInputView {
         }
     }
 
-    private void displayAdvancedMenu() {
+    private void displayAdvancedMenu() throws SQLException {
         while (true) {
             System.out.println();
             System.out.println("=================================");
@@ -140,15 +146,20 @@ public class CourseInputView {
         }
     }
 
-    private void createCourseWithDefaultSection() {
+    private void createCourseWithDefaultSection() throws SQLException {
         outputView.printMessage("\n--- [심화 실습] 트랜잭션으로 강좌 개설 ---");
 
-        boolean result = true;
+        /* comment.
+         *   강의를 등록함과 동시에, 강의 안에 sections 을 삽입
+         *   1. 강의를 등록한다.
+         *   2. 강의 내부에 섹션을 등록한다.
+         *  */
+        boolean result = controller.createCourseWithDefaultSection();
 
         if (result) {
-            outputView.printSuccess("");
+            outputView.printSuccess("✅ 강좌와 기본 섹션이 성공적으로 생성 되었습니다!");
         } else {
-            outputView.printError("");
+            outputView.printError("🚨 강좌 개설 비즈니스 로직 처리 중 문제 발생!!");
         }
     }
 
@@ -157,7 +168,9 @@ public class CourseInputView {
         System.out.print("조회할 강좌 ID를 입력해주세요 : ");
         long id = inputLong();
 
-        outputView.printCourseDetail(null);
+        CourseSectionDTO courseDetail = controller.findJoin(id);
+
+        outputView.printCourseDetail(courseDetail);
     }
 
     private void createCourse() {
@@ -167,7 +180,13 @@ public class CourseInputView {
         System.out.print("과정 설명을 입력해주세요 : ");
         String description = sc.nextLine();
 
-        Long result = 0L;
+        /* comment.
+         *   select 문 같은 경우에는 ResultSet 객체에 SQL 결과가 담기게 된다.
+         *   그러면 Update, Insert, Delete 는 어떻게 결과가 도출될까?
+         *   DML 구문은 SQL 을 execute 하게 되면 영향을 받은 행의 갯수만큼 정수값을 리턴해준다.
+         *   ex) 1개 행 삽입 완료 -> 1
+         *  */
+        Long result = controller.createCourse(title, description);
 
         if (result != null && result > 0) {
             outputView.printSuccess("과정 등록 성공! 생성된 과정 ID : " + result);
@@ -208,10 +227,17 @@ public class CourseInputView {
         System.out.print("삭제할 과정 번호를 입력해주세요 : ");
         long id = inputLong();
 
-        boolean result = true;
+        boolean result = controller.deleteCourseById(id);
 
         if (result) {
             outputView.printSuccess("과정 삭제 성공!");
+            CourseDTO deleteCourse = controller.findCourseById(id);
+
+            if (deleteCourse == null){
+                outputView.printMessage("🚮 확인" + id + "번 과정이 정상 삭제 되었습니다.");
+            } else {
+                outputView.printError("🚨 삭제 확인 중 문제 발생!!");
+            }
 
         } else {
             outputView.printError("과정 삭제 실패 : 해당 ID의 과정이 없습니다.");
@@ -240,5 +266,3 @@ public class CourseInputView {
         }
     }
 }
-
-
