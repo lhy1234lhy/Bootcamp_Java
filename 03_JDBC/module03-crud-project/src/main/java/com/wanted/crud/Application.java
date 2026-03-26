@@ -16,7 +16,7 @@ public class Application {
         // connection 만들기 (try-with-resource 문으로 감싸기, catch절 추가)
         try (Connection con = JDBCTemplate.getConnection()) {
 
-            System.out.println("데이터베이스 연결 성공!!!");
+            System.out.println("✅ 데이터베이스 연결 성공!!!");
             JDBCTemplate.printConnectionStatus();
 
             /* hi.
@@ -25,6 +25,7 @@ public class Application {
             *   -> CourseDAO -> MySQL(RDBMS)
             *   response 시
             *   역순이다. 다만 CourseOutputView를 통해 결과물을 보여줄 것이다,
+            *   역순으로 만들어봐라. 패키지를 나눠서 역할 분배
             * */
 
             /**
@@ -41,7 +42,7 @@ public class Application {
 
 
         } catch (SQLException e) {
-            System.err.println("데이터베이스 연결 실패"); // err + enter
+            System.err.println("🚨 데이터베이스 연결 실패"); // err + enter
         } finally{
             JDBCTemplate.close();
         }

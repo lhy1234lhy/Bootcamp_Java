@@ -1,0 +1,17 @@
+package com.wanted.servlet.e_exception;
+
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+
+@WebServlet("/show404error")
+public class Show404Servlet extends HttpServlet {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("404 Servlet 호출됨");
+        // throw new
+        resp.sendError(404, "PageNotFoundException 발생!!");
+    }
+}
