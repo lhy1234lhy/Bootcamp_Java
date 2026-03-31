@@ -11,7 +11,7 @@ import java.io.IOException;
 /* hi.
 *   @WebServlet 어노테이션은 해당 클래스가 Servlet 임을
 *   명시하는 어노테이션이다.
-*   value 속성은 서블릿이 매필 될 url 패턴을 지정하며,
+*   value 속성은 서블릿이 매핑 될 url 패턴을 지정하며,
 *   해당 클래스는 /life-cycle 요청이 들어오면 처리를 한다.
 *  */
 
