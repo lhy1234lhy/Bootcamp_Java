@@ -10,8 +10,10 @@ import org.springframework.context.annotation.FilterType;
 
 @Configuration
 @ComponentScan(basePackages = "com.wanted.di.section01",
+        // 필터는 거의 안 씀
         excludeFilters = @ComponentScan.Filter(
 //                type = FilterType.ASSIGNABLE_TYPE, classes = {PaymentService.class}
+                //
 //                type = FilterType.ANNOTATION, classes = {org.springframework.stereotype.Service.class}
                 // 서비스라는 어노테이션을 제외하겠다.
 //                type = FilterType.REGEX, pattern = {"com.wanted.di.section01.service.*"}

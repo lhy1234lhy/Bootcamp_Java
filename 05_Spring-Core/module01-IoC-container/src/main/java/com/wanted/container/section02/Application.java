@@ -19,6 +19,7 @@ public class Application {
         /* hi.
         *   IoC Contatiner == Application Context == Bean Factory
         *  */
+        // 컨테이너가 만들어짐
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         // getBean() : 컨테이너에 등록 된 객체를 꺼낸다.

@@ -9,6 +9,8 @@ public class Application {
 
     public static void main(String[] args) {
 
+        // singlePay와 singlePay2는 완전히 동일한 하나의 객체
+
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         System.out.println("============싱글톤 스코프 테스트==================");
@@ -23,7 +25,9 @@ public class Application {
         PaymentService singlePay2 = context.getBean("singlePay", PaymentService.class);
         System.out.println("singlePay2 의 마지막 주문 ID : " + singlePay2.getLastOrderId());
 
+
         System.out.println("======================================");
+
 
         System.out.println("============프로토타입 스코프 테스트==================");
         PaymentService protoPay = context.getBean("protoPay", PaymentService.class);

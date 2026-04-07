@@ -7,13 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-/* hi.
-*   IoC 컨테이너에게 해당 클래스가 Bean(객체) 설정 정보가 가지고 있는
-*   설정 클래스임을 알려주는 어노테이션이다.
-*   해당 클래스 자체도 Bean 으로 등록되어 IoC 컨테이너에서 객체로 관리된다.
-*   이 클래스의 역할은 하나 이상의 @Bean 메소드를 사용하여
-*   컨테이너가 어떤 객체를 등록할 지 알려주는 역할을 한다.
-*  */
 @Configuration
 public class AppConfig {
 
@@ -39,6 +32,7 @@ public class AppConfig {
     *   - 주의 : Bean 이 생성되면 컨테이너는 더이상 관리하지 않는다. 따라서 메모리 해제 등을
     *   - 별도로 고려해야 한다.
     *  */
+
     @Bean ("protoPay")
     @Scope("prototype") // 이 설정을 하게 되면, 더이상 싱글톤으로 관리되지 않는다.
     public PaymentService paymentServiceProto() {
