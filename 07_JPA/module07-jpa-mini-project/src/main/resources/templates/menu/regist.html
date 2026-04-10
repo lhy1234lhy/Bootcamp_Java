@@ -25,6 +25,7 @@
 
 <script>
     // category 정보 담겨있음
+    <!-- fetch는 기본적으로 GET 방식이다. -->
 
     fetch('/menu/category') // 아직은 js 객체가 아닌 형태만 js
         .then(res => res.json()) // 형태만 js 인 녀석을 진짜 js객체로 변환
@@ -44,7 +45,18 @@
                 $categoryCode.appendChild($option);
             }
 
-        })
+        });
+
+        // fetch("menu/delete/1", {
+        //     method : "DELETE",
+        //     header : {
+        //         "Content-Type" : "application/json"
+        //     },
+        //     body : JSON.stringify({
+        //         name : "raccoon",
+        //         age : 20
+        //     })
+        // })
 </script>
 </body>
 </html>

@@ -69,8 +69,42 @@ public class MenuController {
     *   1개의 핸들러메서드에서 여러 데이터를 넣는 것이 아닌 비동기 방ㅅ기으로
     *   각 핸들러메서드에서 전달되는 값을 조합할 때 유용하게 사용된다.
     *  */
-    @ResponseBody
+    @ResponseBody // 이게 있어야 PUT, DELETE 사용 가능 (GET, POST만 있는건 아니다)
     public List<CategoryDTO> findCategoryList(){ // Void, ModelAndView, String
         return menuService.findAllCategory();
     }
+
+//    // delete는 json만 된다.
+//    @DeleteMapping("menu/delete/{menuCode}")
+//    @ResponseBody
+//    public String deleteTestMethod(@RequestBody MemberDTO memberDTO){
+//
+//        return menuCode + "번 메뉴 삭제 완료!";
+//
+//    }
+
+    @PostMapping("/regist")
+    public ModelAndView registMEnu(@ModelAttribute MenuDTO registMenu, ModelAndView mv){
+        System.out.println("메뉴 등록 시 화면에서 넘어오는  값 = " + registMenu);
+        int menuCode = menuService.registNewMenu(registMenu);
+
+        System.out.println("서비스에서 전달 받은 menuCode = " + menuCode);
+
+        mv.setViewName("redirect:/menu/" +menuCode);
+
+        return mv;
+    }
+    @GetMapping("/modify")
+    public void modifyPage(){}
+
+    @PostMapping("/modify")
+    public ModelAndView modifyMenuName(@RequestParam int menuCode, @RequestParam String menuName, ModelAndView mv){
+
+        menuService.modifyMenuName(menuCode, menuName);
+
+        mv.setViewName("redirect:/menu/" + menuCode);
+
+        return mv;
+    }
+
 }
