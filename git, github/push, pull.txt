@@ -1,0 +1,19 @@
+파일 만들고 파일 안에 텍스트 파일 무조건 하나 추가.
+파일 안에서 bash 열어서 
+git init
+git remote add origin https://github.com/AtwoBthree/team-notes2
+git add .
+git status
+git commit -m "커밋함" (로컬 저장)
+git push origin master
+pr
+
+내 브랜치명: feature/E-decisions-m
+
+git pull origin master( 이전 사람 브랜치명ormaster)
+git branch modify (자신의 가지 만들기)
+git checkout feature/E-decisions (마스터에서 가지로(modify로))
+git add .
+git commit -m "수정 E 중급"
+git push origin 자기 브랜치명
+
